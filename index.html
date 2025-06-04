@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カロリー計算機 - 目標体重達成サポート</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .calculator-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .form-col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .results {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
+            display: none;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .result-value {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .affiliate-section {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .affiliate-title {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .affiliate-btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        .history-section {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .history-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .clear-history {
+            background: #dc3545;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .calculator-card {
+                padding: 20px;
+            }
+            
+            /* 楽天アフィリエイト商品のモバイル対応 */
+            .affiliate-section table {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            
+            .affiliate-section td > div {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍎 カロリー計算機</h1>
+            <p>目標体重まであと何kcal？理想の体型を手に入れよう！</p>
+        </div>
+
+        <div class="calculator-card">
+            <form id="calorieForm">
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="height">身長 (cm)</label>
+                            <input type="number" id="height" required min="100" max="250" step="0.1">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="weight">現在の体重 (kg)</label>
+                            <input type="number" id="weight" required min="20" max="300" step="0.1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="age">年齢</label>
+                            <input type="number" id="age" required min="10" max="120">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="gender">性別</label>
+                            <select id="gender" required>
+                                <option value="">選択してください</option>
+                                <option value="male">男性</option>
+                                <option value="female">女性</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="activity">活動レベル</label>
+                    <select id="activity" required>
+                        <option value="">選択してください</option>
+                        <option value="1.2">座りがち（デスクワーク中心）</option>
+                        <option value="1.375">軽い運動（週1-3回）</option>
+                        <option value="1.55">中程度の運動（週3-5回）</option>
+                        <option value="1.725">激しい運動（週6-7回）</option>
+                        <option value="1.9">非常に激しい運動（1日2回など）</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="targetWeight">目標体重 (kg)</label>
+                    <input type="number" id="targetWeight" required min="20" max="300" step="0.1">
+                </div>
+
+                <button type="submit" class="calculate-btn">💪 計算する</button>
+            </form>
+
+            <div id="results" class="results">
+                <div class="result-item">
+                    <span class="result-label">基礎代謝率 (BMR)</span>
+                    <span class="result-value" id="bmr">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">1日の消費カロリー (TDEE)</span>
+                    <span class="result-value" id="tdee">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">推奨摂取カロリー</span>
+                    <span class="result-value" id="recommendedCalories">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">週間の体重変化予想</span>
+                    <span class="result-value" id="weeklyChange">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">目標達成予想日数</span>
+                    <span class="result-value" id="estimatedDays">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="affiliate-section">
+            <h2 class="affiliate-title">🎯 ダイエット成功をサポート</h2>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h3 style="color: #333; margin-bottom: 15px;">📢 おすすめダイエットプロテイン</h3>
+                <p style="color: #666; margin-bottom: 20px;">カロリー制限中でも必要な栄養素をしっかり補給</p>
+                
+                <!-- 楽天アフィリエイト商品 -->
+                <table border="0" cellpadding="0" cellspacing="0" style="margin: 0 auto;"><tr><td><div style="border:1px solid #95a5a6;border-radius:.75rem;background-color:#FFFFFF;width:504px;margin:0px;padding:5px;text-align:center;overflow:hidden;"><table><tr><td style="width:240px"><a href="https://hb.afl.rakuten.co.jp/ichiba/48d485d8.5fb22ab4.48d485d9.de59eec5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbambi-water%2Fbambidietshake%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://hbb.afl.rakuten.co.jp/hgb/48d485d8.5fb22ab4.48d485d9.de59eec5/?me_id=1294199&item_id=10000052&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fbambi-water%2Fcabinet%2Fpage%2Fbps%2Fbps_th00_2412.jpg%3F_ex%3D240x240&s=240x240&t=picttext" border="0" style="margin:2px" alt="[商品価格に関しましては、リンクが作成された時点と現時点で情報が変更されている場合がございます。]" title="[商品価格に関しましては、リンクが作成された時点と現時点で情報が変更されている場合がございます。]"></a></td><td style="vertical-align:top;width:248px;display: block;"><p style="font-size:12px;line-height:1.4em;text-align:left;margin:0px;padding:2px 6px;word-wrap:break-word"><a href="https://hb.afl.rakuten.co.jp/ichiba/48d485d8.5fb22ab4.48d485d9.de59eec5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbambi-water%2Fbambidietshake%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;">本日終了＼P5倍／プロテイン 女性 ダイエット ソイプロテイン プロテインダイエット 置き換えダイエット 置き換え シェイク ファスティング タンパク質 低糖質 低脂質 ホエイプロテイン 低カロリー バンビウォーター 春夏</a><br><span >価格：2,998円（税込、送料無料)</span> <span style="color:#BBB">(2025/6/4時点)</span></p><div style="margin:10px;"><a href="https://hb.afl.rakuten.co.jp/ichiba/48d485d8.5fb22ab4.48d485d9.de59eec5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbambi-water%2Fbambidietshake%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://static.affiliate.rakuten.co.jp/makelink/rl.svg" style="float:left;max-height:27px;width:auto;margin-top:0" ></a><a href="https://hb.afl.rakuten.co.jp/ichiba/48d485d8.5fb22ab4.48d485d9.de59eec5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbambi-water%2Fbambidietshake%2F%3Fscid%3Daf_pc_bbtn&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ==" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><div style="float:right;width:41%;height:27px;background-color:#bf0000;color:#fff!important;font-size:12px;font-weight:500;line-height:27px;margin-left:1px;padding: 0 12px;border-radius:16px;cursor:pointer;text-align:center;"> 楽天で購入 </div></a></div></td></tr></table></div><br><p style="color:#000000;font-size:12px;line-height:1.4em;margin:5px;word-wrap:break-word"></p></td></tr></table>
+                
+                <div style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); border-radius: 15px; max-width: 600px; margin: 20px auto;">
+                    <h4 style="color: #333; margin-bottom: 10px;">💡 このプロテインの特徴</h4>
+                    <ul style="text-align: left; color: #555; margin: 0; padding-left: 20px;">
+                        <li>低カロリー設計でダイエット中に最適</li>
+                        <li>女性に嬉しいソイプロテイン配合</li>
+                        <li>置き換えダイエットに効果的</li>
+                        <li>送料無料でお得にお試し可能</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="history-section">
+            <h2>📊 計算履歴 <button class="clear-history" onclick="clearHistory()">履歴クリア</button></h2>
+            <div id="historyContainer">
+                <p style="text-align: center; color: #666;">計算結果がここに保存されます</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Harris-Benedict式による基礎代謝計算
+        function calculateBMR(weight, height, age, gender) {
+            if (gender === 'male') {
+                return 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+            } else {
+                return 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+            }
+        }
+
+        // TDEE計算（BMR × 活動係数）
+        function calculateTDEE(bmr, activityLevel) {
+            return bmr * parseFloat(activityLevel);
+        }
+
+        // 目標達成に必要なカロリー調整を計算
+        function calculateCalorieAdjustment(currentWeight, targetWeight, tdee) {
+            const weightDifference = currentWeight - targetWeight;
+            const caloriesPerKg = 7700; // 1kg = 約7700kcal
+            
+            if (weightDifference > 0) {
+                // 減量の場合
+                const dailyDeficit = Math.min(500, (weightDifference * caloriesPerKg) / 90); // 最大500kcal/日の赤字
+                return {
+                    recommendedCalories: Math.round(tdee - dailyDeficit),
+                    weeklyChange: -Math.round((dailyDeficit * 7 / caloriesPerKg) * 100) / 100,
+                    estimatedDays: Math.round((weightDifference * caloriesPerKg) / dailyDeficit)
+                };
+            } else if (weightDifference < 0) {
+                // 増量の場合
+                const dailySurplus = Math.min(300, (-weightDifference * caloriesPerKg) / 90); // 最大300kcal/日の余剰
+                return {
+                    recommendedCalories: Math.round(tdee + dailySurplus),
+                    weeklyChange: Math.round((dailySurplus * 7 / caloriesPerKg) * 100) / 100,
+                    estimatedDays: Math.round((-weightDifference * caloriesPerKg) / dailySurplus)
+                };
+            } else {
+                // 維持の場合
+                return {
+                    recommendedCalories: Math.round(tdee),
+                    weeklyChange: 0,
+                    estimatedDays: 0
+                };
+            }
+        }
+
+        // 結果を表示
+        function displayResults(data) {
+            document.getElementById('bmr').textContent = `${Math.round(data.bmr)} kcal`;
+            document.getElementById('tdee').textContent = `${Math.round(data.tdee)} kcal`;
+            document.getElementById('recommendedCalories').textContent = `${data.recommendedCalories} kcal`;
+            document.getElementById('weeklyChange').textContent = `${data.weeklyChange > 0 ? '+' : ''}${data.weeklyChange} kg`;
+            document.getElementById('estimatedDays').textContent = data.estimatedDays === 0 ? '目標達成済み' : `約${data.estimatedDays}日`;
+            
+            document.getElementById('results').style.display = 'block';
+            
+            // 履歴に保存
+            saveToHistory(data);
+        }
+
+        // 履歴保存
+        function saveToHistory(data) {
+            const history = JSON.parse(localStorage.getItem('calorieHistory') || '[]');
+            const historyItem = {
+                date: new Date().toLocaleString('ja-JP'),
+                ...data
+            };
+            history.unshift(historyItem);
+            
+            // 最新10件まで保存
+            if (history.length > 10) {
+                history.splice(10);
+            }
+            
+            localStorage.setItem('calorieHistory', JSON.stringify(history));
+            displayHistory();
+        }
+
+        // 履歴表示
+        function displayHistory() {
+            const history = JSON.parse(localStorage.getItem('calorieHistory') || '[]');
+            const container = document.getElementById('historyContainer');
+            
+            if (history.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #666;">計算結果がここに保存されます</p>';
+                return;
+            }
+            
+            container.innerHTML = history.map(item => `
+                <div class="history-item">
+                    <strong>${item.date}</strong><br>
+                    BMR: ${Math.round(item.bmr)} kcal | TDEE: ${Math.round(item.tdee)} kcal | 
+                    推奨: ${item.recommendedCalories} kcal | 目標まで: ${item.estimatedDays === 0 ? '達成済み' : item.estimatedDays + '日'}
+                </div>
+            `).join('');
+        }
+
+        // 履歴クリア
+        function clearHistory() {
+            localStorage.removeItem('calorieHistory');
+            displayHistory();
+        }
+
+        // フォーム送信処理
+        document.getElementById('calorieForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                height: parseFloat(document.getElementById('height').value),
+                weight: parseFloat(document.getElementById('weight').value),
+                age: parseInt(document.getElementById('age').value),
+                gender: document.getElementById('gender').value,
+                activity: document.getElementById('activity').value,
+                targetWeight: parseFloat(document.getElementById('targetWeight').value)
+            };
+            
+            // 計算実行
+            const bmr = calculateBMR(formData.weight, formData.height, formData.age, formData.gender);
+            const tdee = calculateTDEE(bmr, formData.activity);
+            const adjustment = calculateCalorieAdjustment(formData.weight, formData.targetWeight, tdee);
+            
+            const results = {
+                bmr,
+                tdee,
+                height: formData.height,
+                weight: formData.weight,
+                targetWeight: formData.targetWeight,
+                ...adjustment
+            };
+            
+            displayResults(results);
+            
+            // 結果までスクロール
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // ページ読み込み時に履歴表示
+        document.addEventListener('DOMContentLoaded', function() {
+            displayHistory();
+        });
+    </script>
+</body>
+</html>
