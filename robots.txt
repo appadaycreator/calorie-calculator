@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aganu8kot050.github.io/calorie-calculator/sitemap.xml
