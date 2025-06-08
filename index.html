@@ -518,6 +518,91 @@
             outline: 2px solid #4299e1;
             outline-offset: 2px;
         }
+
+        /* 楽天アフィリエイトのレスポンシブ対応 */
+        .rakuten-affiliate {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 20px 0;
+            padding: 0;
+        }
+
+        .rakuten-affiliate iframe {
+            max-width: 100%;
+            height: auto;
+            min-height: 300px;
+        }
+
+        /* フッター */
+        .footer {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px 20px;
+            margin-top: 60px;
+            color: white;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .disclaimer {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .calculator-card {
+                padding: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .rakuten-affiliate {
+                margin: 15px 0;
+            }
+
+            .footer {
+                padding: 30px 15px;
+            }
+        }
     </style>
 </head>
 
@@ -716,6 +801,26 @@
             </div>
         </section>
     </div>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="copyright">
+                © 2024 カロリー計算機 All Rights Reserved.
+            </div>
+            <div class="disclaimer">
+                免責事項：このサイトで提供される情報は、一般的な健康管理の参考情報として提供されるものです。
+                医療的なアドバイスや診断を目的としたものではありません。健康に関する具体的な問題や懸念がある場合は、
+                必ず医師や専門家にご相談ください。また、このサイトの利用によって生じたいかなる損害についても、
+                当サイトは責任を負いません。
+            </div>
+            <div class="footer-links">
+                <a href="privacy-policy.html">プライバシーポリシー</a>
+                <a href="terms.html">利用規約</a>
+                <a href="contact.html">お問い合わせ</a>
+            </div>
+        </div>
+    </footer>
 
     <script>
         // グローバル変数
