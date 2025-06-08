@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ | カロリー計算機</title>
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #333; padding: 30px; }
+        .container { max-width: 700px; margin: 0 auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); padding: 32px; }
+        h1 { font-size: 2rem; margin-bottom: 24px; }
+        p { font-size: 1rem; line-height: 1.8; }
+        form { margin-top: 24px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; }
+        input, textarea { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; margin-bottom: 16px; font-size: 1rem; }
+        button { background: #667eea; color: #fff; border: none; padding: 12px 32px; border-radius: 6px; font-size: 1rem; cursor: pointer; }
+        button:hover { background: #5a67d8; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>お問い合わせ</h1>
+        <p>ご質問・ご要望・不具合報告などがございましたら、下記フォームよりご連絡ください。</p>
+        <form>
+            <label for="name">お名前</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">メールアドレス</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">お問い合わせ内容</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+            <button type="submit">送信</button>
+        </form>
+        <p style="font-size:0.9rem; color:#888; margin-top:16px;">※送信ボタンはダミーです。実際の送信は行われません。</p>
+    </div>
+</body>
+</html> 

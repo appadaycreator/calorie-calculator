@@ -527,12 +527,29 @@
             -webkit-overflow-scrolling: touch;
             margin: 20px 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
         }
-
-        .rakuten-affiliate iframe {
+        .rakuten-affiliate > * {
             max-width: 100%;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .rakuten-affiliate iframe,
+        .rakuten-affiliate img {
+            max-width: 100%;
+            width: 100%;
             height: auto;
-            min-height: 300px;
+            object-fit: contain;
+            display: block;
+        }
+        @media (max-width: 480px) {
+            .rakuten-affiliate {
+                margin: 10px 0;
+                padding: 0;
+            }
         }
 
         /* フッター */
