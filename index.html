@@ -523,7 +523,6 @@
         .rakuten-affiliate {
             width: 100%;
             max-width: 100%;
-            overflow-x: auto;
             -webkit-overflow-scrolling: touch;
             margin: 20px 0;
             padding: 0;
@@ -532,11 +531,58 @@
             align-items: center;
             box-sizing: border-box;
         }
-        .rakuten-affiliate > * {
-            max-width: 100%;
+
+        .rakuten-wrapper {
             width: 100%;
+            max-width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            text-align: center;
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 15px;
             box-sizing: border-box;
         }
+
+        .rakuten-wrapper > table {
+            width: 100% !important;
+            max-width: 504px !important;
+            margin: 0 auto !important;
+            display: block;
+            table-layout: auto;
+        }
+
+        .rakuten-wrapper table div[style*="width:504px"] {
+            width: 100% !important;
+            max-width: 100% !important;
+            overflow: visible !important;
+            box-sizing: border-box;
+        }
+
+        .rakuten-wrapper table div[style*="width:504px"] table {
+            width: 100% !important;
+            table-layout: auto;
+        }
+
+        .rakuten-wrapper table td {
+            width: auto !important;
+            box-sizing: border-box;
+        }
+
+        .rakuten-wrapper table td > div {
+            width: 100% !important;
+            max-width: 100% !important;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .rakuten-wrapper table img {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
         .rakuten-affiliate iframe,
         .rakuten-affiliate img {
             max-width: 100%;
@@ -545,10 +591,29 @@
             object-fit: contain;
             display: block;
         }
+        
         @media (max-width: 480px) {
             .rakuten-affiliate {
                 margin: 10px 0;
                 padding: 0;
+            }
+            .rakuten-wrapper {
+                padding: 10px;
+            }
+
+            .rakuten-wrapper table div[style*="width:504px"] table tr {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+            .rakuten-wrapper table div[style*="width:504px"] table td {
+                width: 100% !important;
+                display: block;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+            .rakuten-wrapper table div[style*="width:504px"] table td img {
+                margin: 0 auto;
             }
         }
 
@@ -798,8 +863,8 @@
                 </div>
             </div>
 
-            <div style="text-align: center; background: #f7fafc; padding: 20px; border-radius: 15px;">
-                <table border="0" cellpadding="0" cellspacing="0" style="margin: 0 auto;"><tr><td><div style="border:1px solid #95a5a6;border-radius:.75rem;background-color:#FFFFFF;width:504px;margin:0px;padding:5px;text-align:center;overflow:hidden;"><table><tr><td style="width:240px"><a href="https://hb.afl.rakuten.co.jp/ichiba/48d485d8.5fb22ab4.48d485d9.de59eec5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbambi-water%2Fbambidietshake%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://hbb.afl.rakuten.co.jp/hgb/48d485d8.5fb22ab4.48d485d9.de59eec5/?me_id=1294199&item_id=10000052&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fbambi-water%2Fcabinet%2Fpage%2Fbps%2Fbps_th00_2412.jpg%3F_ex%3D240x240&s=240x240&t=picttext" border="0" style="margin:2px" alt="プロテインダイエット商品" title="プロテインダイエット商品"></a></td><td style="vertical-align:top;width:248px;display: block;"><p style="font-size:12px;line-height:1.4em;text-align:left;margin:0px;padding:2px 6px;word-wrap:break-word"><a href="https://hb.afl.rakuten.co.jp/ichiba/48d485d8.5fb22ab4.48d485d9.de59eec5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbambi-water%2Fbambidietshake%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;">本日終了＼P5倍／プロテイン 女性 ダイエット ソイプロテイン プロテインダイエット 置き換えダイエット 置き換え シェイク ファスティング タンパク質 低糖質 低脂質 ホエイプロテイン 低カロリー バンビウォーター 春夏</a><br><span style="color: #e53e3e; font-weight: bold; font-size: 14px;">価格：2,998円（税込、送料無料)</span> <span style="color:#BBB">(2025/6/4時点)</span></p><div style="margin:10px;"><a href="https://hb.afl.rakuten.co.jp/ichiba/48d485d8.5fb22ab4.48d485d9.de59eec5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbambi-water%2Fbambidietshake%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://static.affiliate.rakuten.co.jp/makelink/rl.svg" style="float:left;max-height:27px;width:auto;margin-top:0" ></a><a href="https://hb.afl.rakuten.co.jp/ichiba/48d485d8.5fb22ab4.48d485d9.de59eec5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbambi-water%2Fbambidietshake%2F%3Fscid%3Daf_pc_bbtn&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ==" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><div style="float:right;width:41%;height:27px;background-color:#bf0000;color:#fff!important;font-size:12px;font-weight:500;line-height:27px;margin-left:1px;padding: 0 12px;border-radius:16px;cursor:pointer;text-align:center;"> 楽天で購入 </div></a></div></td></tr></table></div><br><p style="color:#000000;font-size:12px;line-height:1.4em;margin:5px;word-wrap:break-word"></p></td></tr></table>
+            <div class="rakuten-wrapper">
+                <table border="0" cellpadding="0" cellspacing="0" style="margin: 0 auto;"><tr><td><div style="border:1px solid #95a5a6;border-radius:.75rem;background-color:#FFFFFF;width:504px;margin:0px;padding:5px;text-align:center;overflow:hidden;"><table><tr><td style="width:240px"><a href="https://hb.afl.rakuten.co.jp/ichiba/48d485d8.5fb22ab4.48d485d9.de59eec5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbambi-water%2Fbambidietshake%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://hbb.afl.rakuten.co.jp/hgb/48d485d8.5fb22ab4.48d485d9.de59eec5/?me_id=1294199&item_id=10000052&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fbambi-water%2Fcabinet%2Fpage%2Fbps%2Fbps_th00_2412.jpg%3F_ex%3D240x240&s=240x240&t=picttext" border="0" style="margin:2px" alt="プロテインダイエット商品" title="プロテインダイエット商品"></a></td><td style="vertical-align:top;width:248px;display: block;"><p style="font-size:12px;line-height:1.4em;text-align:left;margin:0px;padding:2px 6px;word-wrap:break-word"><a href="https://hb.afl.rakuten.co.jp/ichiba/48d485d8.5fb22ab4.48d485d9.de59eec5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbambi-water%2Fbambidietshake%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;">本日終了＼P5倍／プロテイン 女性 ダイエット ソイプロテイン プロテインダイエット 置き換えダイエット 置き換え シェイク ファスティング タンパク質 低糖質 低脂質 ホエイプロテイン 低カロリー バンビウォーター 春夏</a><br><span style="color: #e53e3e; font-weight: bold; font-size: 14px;">価格：2,998円（税込、送料無料)</span> <span style="color:#BBB">(2025/6/4時点)</span></p><div style="margin:10px;"><a href="https://hb.afl.rakuten.co.jp/ichiba/48d485d8.5fb22ab4.48d485d9.de59eec5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbambi-water%2Fbambidietshake%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://static.affiliate.rakuten.co.jp/makelink/rl.svg" style="float:left;max-height:27px;width:auto;margin-top:0" ></a><a href="https://hb.afl.rakuten.co.jp/ichiba/48d485d8.5fb22ab4.48d485d9.de59eec5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbambi-water%2Fbambidietshake%2F%3Fscid%3Daf_pc_bbtn&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ==" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><div style="float:right;width:41%;height:27px;background-color:#bf0000;color:#fff!important;font-size:12px;font-weight:500;line-height:27px;margin-left:1px;padding: 0 12px;border-radius:16px;cursor:pointer;text-align:center;"> 楽天で購入 </div></a></div></td></tr></table></div><br><p style="color:#000000;font-size:12px;line-height:1.4em;margin:5px;word-wrap:break-word"></p></td></tr></table>
             </div>
         </section>
 
